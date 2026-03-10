@@ -874,7 +874,7 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
         onClose={() => setEditingTransacao(null)}
         onSaved={onTransacaoUpdated}
       />
-      <div className="bg-white text-black p-8 max-w-[210mm] mx-auto" style={{ fontFamily: "'Graphik', 'Helvetica Neue', Helvetica, Arial, sans-serif", fontSize: "11px", lineHeight: "1.5" }}>
+      <div className="bg-white text-black p-8 max-w-[210mm] mx-auto" style={{ fontFamily: "'Graphik', 'Helvetica Neue', Helvetica, Arial, sans-serif", fontSize: "12px", lineHeight: "1.8" }}>
         {/* HEADER */}
         <div className="flex justify-between items-start mb-12">
           <img src={logoNu} alt="Nu" style={{ height: "32px", width: "auto", marginLeft: "30px" }} />

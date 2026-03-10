@@ -68,8 +68,8 @@ const ExtratoExport = () => {
   const pageStyle: React.CSSProperties = {
     fontFamily: "'Graphik', 'Helvetica Neue', Helvetica, Arial, sans-serif",
     fontWeight: 400,
-    fontSize: "11px",
-    lineHeight: "1.5",
+    fontSize: "12px",
+    lineHeight: "1.8",
     color: "#222",
   };
 
