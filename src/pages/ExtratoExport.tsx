@@ -237,7 +237,7 @@ const ExtratoExport = () => {
                     {entradas.length > 0 && (
                       <>
                         <tr>
-                          <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222", fontWeight: 700 }}>{fmtDia(dia)}</td>
+                          <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222" }}>{fmtDia(dia)}</td>
                           <td style={{ fontWeight: 700, padding: "10px 0", verticalAlign: "top" }}>Total de entradas</td>
                           <td style={{ padding: "10px 0" }}></td>
                           <td style={{ fontWeight: 700, textAlign: "right", padding: "10px 0 10px 24px", whiteSpace: "nowrap", verticalAlign: "top" }}>+ {fmt(totalE)}</td>
@@ -248,8 +248,8 @@ const ExtratoExport = () => {
                             <td style={{ padding: "4px 0", verticalAlign: "top", width: "200px" }}>
                               {t.descricao}
                             </td>
-                            <td style={{ padding: "4px 8px", verticalAlign: "top", color: "#555", fontSize: "10px", lineHeight: "1.6" }}>
-                              {t.beneficiario_nome} - {t.beneficiario_documento} - {t.beneficiario_banco} Agência: {t.beneficiario_agencia} Conta: {t.beneficiario_conta}
+                            <td style={{ padding: "4px 8px", verticalAlign: "top", color: "#555", fontSize: "11px", lineHeight: "2.5" }}>
+                              {t.beneficiario_nome} - {t.beneficiario_documento} - {t.beneficiario_banco}{t.beneficiario_banco_codigo ? ` (${t.beneficiario_banco_codigo})` : ""} Agência: {t.beneficiario_agencia} Conta: {t.beneficiario_conta}
                             </td>
                             <td style={{ textAlign: "right", padding: "4px 0 4px 24px", verticalAlign: "top", whiteSpace: "nowrap" }}>{fmt(parseFloat(t.valor))}</td>
                           </tr>
@@ -261,7 +261,7 @@ const ExtratoExport = () => {
                     {saidas.length > 0 && (
                       <>
                         <tr>
-                          <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222", fontWeight: 700 }}>{!dateShownInEntradas ? fmtDia(dia) : ""}</td>
+                          <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222" }}>{!dateShownInEntradas ? fmtDia(dia) : ""}</td>
                           <td style={{ fontWeight: 700, padding: "10px 0", verticalAlign: "top" }}>Total de saídas</td>
                           <td style={{ padding: "10px 0" }}></td>
                           <td style={{ fontWeight: 700, textAlign: "right", padding: "10px 0 10px 24px", whiteSpace: "nowrap", verticalAlign: "top" }}>- {fmt(totalS)}</td>
@@ -272,8 +272,8 @@ const ExtratoExport = () => {
                             <td style={{ padding: "4px 0", verticalAlign: "top", width: "200px" }}>
                               {t.descricao}
                             </td>
-                            <td style={{ padding: "4px 8px", verticalAlign: "top", color: "#555", fontSize: "10px", lineHeight: "1.6" }}>
-                              {t.beneficiario_nome} - {t.beneficiario_documento} - {t.beneficiario_banco} Agência: {t.beneficiario_agencia} Conta: {t.beneficiario_conta}
+                            <td style={{ padding: "4px 8px", verticalAlign: "top", color: "#555", fontSize: "11px", lineHeight: "2.5" }}>
+                              {t.beneficiario_nome} - {t.beneficiario_documento} - {t.beneficiario_banco}{t.beneficiario_banco_codigo ? ` (${t.beneficiario_banco_codigo})` : ""} Agência: {t.beneficiario_agencia} Conta: {t.beneficiario_conta}
                             </td>
                             <td style={{ textAlign: "right", padding: "4px 0 4px 24px", verticalAlign: "top", whiteSpace: "nowrap" }}>{fmt(parseFloat(t.valor))}</td>
                           </tr>

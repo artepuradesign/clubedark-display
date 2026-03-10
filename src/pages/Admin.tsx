@@ -999,13 +999,47 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
 // Export component
 function ExportarExtrato({ selectedConta, contaInfo }: { selectedConta: string; contaInfo: any }) {
   const navigate = useNavigate();
+  const [modo, setModo] = useState<"mes" | "periodo">("mes");
+  const [mesSelecionado, setMesSelecionado] = useState(() => {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+  });
   const [dataInicio, setDataInicio] = useState("");
   const [dataFim, setDataFim] = useState("");
 
+  const meses = [
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro",
+  ];
+
+  const gerarOpcoesMeses = () => {
+    const opcoes: { value: string; label: string }[] = [];
+    const now = new Date();
+    for (let i = 0; i < 24; i++) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const value = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      const label = `${meses[d.getMonth()]} ${d.getFullYear()}`;
+      opcoes.push({ value, label });
+    }
+    return opcoes;
+  };
+
   const handleContinuar = () => {
     if (!selectedConta) { toast.error("Selecione uma conta primeiro"); return; }
-    if (!dataInicio || !dataFim) { toast.error("Selecione o período"); return; }
-    navigate(`/extrato-export?conta_id=${selectedConta}&data_inicio=${dataInicio}&data_fim=${dataFim}`);
+
+    let inicio: string, fim: string;
+    if (modo === "mes") {
+      const [ano, mes] = mesSelecionado.split("-").map(Number);
+      inicio = `${ano}-${String(mes).padStart(2, "0")}-01`;
+      const ultimoDia = new Date(ano, mes, 0).getDate();
+      fim = `${ano}-${String(mes).padStart(2, "0")}-${String(ultimoDia).padStart(2, "0")}`;
+    } else {
+      if (!dataInicio || !dataFim) { toast.error("Selecione o período"); return; }
+      inicio = dataInicio;
+      fim = dataFim;
+    }
+
+    navigate(`/extrato-export?conta_id=${selectedConta}&data_inicio=${inicio}&data_fim=${fim}`);
   };
 
   return (
@@ -1017,16 +1051,52 @@ function ExportarExtrato({ selectedConta, contaInfo }: { selectedConta: string; 
         <p className="text-sm text-muted-foreground mb-6">
           Selecione o período desejado para gerar uma pré-visualização do extrato no formato A4, pronto para exportar como PDF.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div>
-            <Label>Data início *</Label>
-            <Input type="date" value={dataInicio} onChange={e => setDataInicio(e.target.value)} required />
-          </div>
-          <div>
-            <Label>Data fim *</Label>
-            <Input type="date" value={dataFim} onChange={e => setDataFim(e.target.value)} required />
-          </div>
+
+        {/* Seletor de modo */}
+        <div className="flex gap-2 mb-6">
+          <Button
+            variant={modo === "mes" ? "hero" : "outline"}
+            size="sm"
+            onClick={() => setModo("mes")}
+          >
+            Por mês
+          </Button>
+          <Button
+            variant={modo === "periodo" ? "hero" : "outline"}
+            size="sm"
+            onClick={() => setModo("periodo")}
+          >
+            Por período
+          </Button>
         </div>
+
+        {modo === "mes" ? (
+          <div className="mb-6">
+            <Label>Mês *</Label>
+            <Select value={mesSelecionado} onValueChange={setMesSelecionado}>
+              <SelectTrigger className="w-full md:w-96">
+                <SelectValue placeholder="Selecione o mês" />
+              </SelectTrigger>
+              <SelectContent>
+                {gerarOpcoesMeses().map(opt => (
+                  <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div>
+              <Label>Data início *</Label>
+              <Input type="date" value={dataInicio} onChange={e => setDataInicio(e.target.value)} required />
+            </div>
+            <div>
+              <Label>Data fim *</Label>
+              <Input type="date" value={dataFim} onChange={e => setDataFim(e.target.value)} required />
+            </div>
+          </div>
+        )}
+
         <Button variant="hero" onClick={handleContinuar}>
           <FileText className="h-4 w-4 mr-2" /> Continuar
         </Button>
