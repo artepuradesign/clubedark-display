@@ -173,7 +173,7 @@ const ExtratoExport = () => {
               <span style={{ fontWeight: 700, fontSize: "13px" }}>
                 {fmtPeriodo(dataInicio)} a {fmtPeriodo(dataFim)}
               </span>
-              <span style={{ fontSize: "12px", color: "#666" }}>VALORES EM R$</span>
+              <span style={{ fontSize: "13px", color: "#666" }}>VALORES EM R$</span>
             </div>
           </div>
 
