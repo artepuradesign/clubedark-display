@@ -231,27 +231,27 @@ const ExtratoExport = () => {
 
             return (
               <div key={dia} style={{ marginBottom: "0", pageBreakInside: "avoid" }}>
-                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "11px" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
                   <tbody>
                     {/* Entradas */}
                     {entradas.length > 0 && (
                       <>
                         <tr>
-                          <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222" }}>{fmtDia(dia)}</td>
-                          <td style={{ fontWeight: 700, padding: "10px 0", verticalAlign: "top" }}>Total de entradas</td>
-                          <td style={{ padding: "10px 0" }}></td>
-                          <td style={{ fontWeight: 700, textAlign: "right", padding: "10px 0 10px 24px", whiteSpace: "nowrap", verticalAlign: "top" }}>+ {fmt(totalE)}</td>
+                          <td style={{ width: "110px", verticalAlign: "top", padding: "14px 16px 14px 0", color: "#222" }}>{fmtDia(dia)}</td>
+                          <td style={{ fontWeight: 700, padding: "14px 0", verticalAlign: "top" }}>Total de entradas</td>
+                          <td style={{ padding: "14px 0" }}></td>
+                          <td style={{ fontWeight: 700, textAlign: "right", padding: "14px 0 14px 24px", whiteSpace: "nowrap", verticalAlign: "top" }}>+ {fmt(totalE)}</td>
                         </tr>
                         {entradas.map((t: any, i: number) => (
                           <tr key={t.id || i}>
-                            <td style={{ padding: "4px 16px 4px 0" }}></td>
-                            <td style={{ padding: "4px 0", verticalAlign: "top", width: "200px" }}>
+                            <td style={{ padding: "8px 16px 8px 0" }}></td>
+                            <td style={{ padding: "8px 0", verticalAlign: "top", width: "200px" }}>
                               {t.descricao}
                             </td>
-                            <td style={{ padding: "4px 8px", verticalAlign: "top", color: "#555", fontSize: "11px", lineHeight: "2.5" }}>
+                            <td style={{ padding: "8px 8px", verticalAlign: "top", color: "#555", fontSize: "11.5px", lineHeight: "2.5" }}>
                               {t.beneficiario_nome} - {t.beneficiario_documento} - {t.beneficiario_banco}{t.beneficiario_banco_codigo ? ` (${t.beneficiario_banco_codigo})` : ""} Agência: {t.beneficiario_agencia} Conta: {t.beneficiario_conta}
                             </td>
-                            <td style={{ textAlign: "right", padding: "4px 0 4px 24px", verticalAlign: "top", whiteSpace: "nowrap" }}>{fmt(parseFloat(t.valor))}</td>
+                            <td style={{ textAlign: "right", padding: "8px 0 8px 24px", verticalAlign: "top", whiteSpace: "nowrap" }}>{fmt(parseFloat(t.valor))}</td>
                           </tr>
                         ))}
                       </>
@@ -261,21 +261,21 @@ const ExtratoExport = () => {
                     {saidas.length > 0 && (
                       <>
                         <tr>
-                          <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222" }}>{!dateShownInEntradas ? fmtDia(dia) : ""}</td>
-                          <td style={{ fontWeight: 700, padding: "10px 0", verticalAlign: "top" }}>Total de saídas</td>
-                          <td style={{ padding: "10px 0" }}></td>
-                          <td style={{ fontWeight: 700, textAlign: "right", padding: "10px 0 10px 24px", whiteSpace: "nowrap", verticalAlign: "top" }}>- {fmt(totalS)}</td>
+                          <td style={{ width: "110px", verticalAlign: "top", padding: "14px 16px 14px 0", color: "#222" }}>{!dateShownInEntradas ? fmtDia(dia) : ""}</td>
+                          <td style={{ fontWeight: 700, padding: "14px 0", verticalAlign: "top" }}>Total de saídas</td>
+                          <td style={{ padding: "14px 0" }}></td>
+                          <td style={{ fontWeight: 700, textAlign: "right", padding: "14px 0 14px 24px", whiteSpace: "nowrap", verticalAlign: "top" }}>- {fmt(totalS)}</td>
                         </tr>
                         {saidas.map((t: any, i: number) => (
                           <tr key={t.id || i}>
-                            <td style={{ padding: "4px 16px 4px 0" }}></td>
-                            <td style={{ padding: "4px 0", verticalAlign: "top", width: "200px" }}>
+                            <td style={{ padding: "8px 16px 8px 0" }}></td>
+                            <td style={{ padding: "8px 0", verticalAlign: "top", width: "200px" }}>
                               {t.descricao}
                             </td>
-                            <td style={{ padding: "4px 8px", verticalAlign: "top", color: "#555", fontSize: "11px", lineHeight: "2.5" }}>
+                            <td style={{ padding: "8px 8px", verticalAlign: "top", color: "#555", fontSize: "11.5px", lineHeight: "2.5" }}>
                               {t.beneficiario_nome} - {t.beneficiario_documento} - {t.beneficiario_banco}{t.beneficiario_banco_codigo ? ` (${t.beneficiario_banco_codigo})` : ""} Agência: {t.beneficiario_agencia} Conta: {t.beneficiario_conta}
                             </td>
-                            <td style={{ textAlign: "right", padding: "4px 0 4px 24px", verticalAlign: "top", whiteSpace: "nowrap" }}>{fmt(parseFloat(t.valor))}</td>
+                            <td style={{ textAlign: "right", padding: "8px 0 8px 24px", verticalAlign: "top", whiteSpace: "nowrap" }}>{fmt(parseFloat(t.valor))}</td>
                           </tr>
                         ))}
                       </>
@@ -283,10 +283,10 @@ const ExtratoExport = () => {
 
                     {/* Saldo do dia */}
                     <tr style={{ borderBottom: "2px solid #ccc" }}>
-                      <td style={{ padding: "10px 16px 10px 0" }}></td>
-                      <td style={{ fontWeight: 700, padding: "10px 0" }}>Saldo do dia</td>
-                      <td style={{ padding: "10px 0" }}></td>
-                      <td style={{ fontWeight: 700, textAlign: "right", padding: "10px 0 10px 24px" }}>{fmt(saldoPorDia[dia])}</td>
+                      <td style={{ padding: "14px 16px 14px 0" }}></td>
+                      <td style={{ fontWeight: 700, padding: "14px 0" }}>Saldo do dia</td>
+                      <td style={{ padding: "14px 0" }}></td>
+                      <td style={{ fontWeight: 700, textAlign: "right", padding: "14px 0 14px 24px" }}>{fmt(saldoPorDia[dia])}</td>
                     </tr>
                   </tbody>
                 </table>
