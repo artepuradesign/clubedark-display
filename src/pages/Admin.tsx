@@ -156,14 +156,21 @@ const Admin = () => {
   const datasOrdenadas = Object.keys(movimentacoes).sort();
   const selectedUser = usuarios.find(u => String(u.conta_id) === selectedConta);
 
-  // Extract unique banks from all transactions
+  // Extract unique banks from all transactions, parsing code from name
   const bancosUnicos = (() => {
     const map = new Map<string, { banco: string; codigo: string }>();
     for (const dia of Object.values(movimentacoes)) {
       for (const t of dia as any[]) {
-        const banco = t.beneficiario_banco;
+        let banco = (t.beneficiario_banco || "").trim();
+        let codigo = (t.beneficiario_banco_codigo || "").trim();
+        // Extract code from parentheses at end of bank name, e.g. "BCO DO BRASIL S.A. (0001)"
+        const match = banco.match(/^(.+?)\s*\((\d{3,4})\)\s*$/);
+        if (match) {
+          banco = match[1].trim();
+          if (!codigo) codigo = match[2];
+        }
         if (banco && !map.has(banco)) {
-          map.set(banco, { banco, codigo: t.beneficiario_banco_codigo || "" });
+          map.set(banco, { banco, codigo });
         }
       }
     }
