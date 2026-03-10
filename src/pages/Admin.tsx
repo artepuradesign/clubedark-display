@@ -963,7 +963,7 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
 
           return (
             <div key={dia} style={{ marginBottom: "0" }}>
-              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "11px" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
                 <tbody>
                   {entradas.length > 0 && (
                     <>
