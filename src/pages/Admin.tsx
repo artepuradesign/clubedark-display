@@ -156,6 +156,20 @@ const Admin = () => {
   const datasOrdenadas = Object.keys(movimentacoes).sort();
   const selectedUser = usuarios.find(u => String(u.conta_id) === selectedConta);
 
+  // Extract unique banks from all transactions
+  const bancosUnicos = (() => {
+    const map = new Map<string, { banco: string; codigo: string }>();
+    for (const dia of Object.values(movimentacoes)) {
+      for (const t of dia as any[]) {
+        const banco = t.beneficiario_banco;
+        if (banco && !map.has(banco)) {
+          map.set(banco, { banco, codigo: t.beneficiario_banco_codigo || "" });
+        }
+      }
+    }
+    return Array.from(map.values());
+  })();
+
   return (
     <div className="min-h-screen bg-secondary/30">
       <header className="bg-background border-b border-border sticky top-0 z-50">
@@ -278,7 +292,22 @@ const Admin = () => {
                     </div>
                     <div>
                       <Label>Banco</Label>
-                      <Input value={novaTransacao.banco} onChange={e => setNovaTransacao(p => ({ ...p, banco: e.target.value }))} />
+                      <Input
+                        list="bancos-list"
+                        value={novaTransacao.banco}
+                        onChange={e => {
+                          const val = e.target.value;
+                          setNovaTransacao(p => ({ ...p, banco: val }));
+                          const found = bancosUnicos.find(b => b.banco === val);
+                          if (found) setNovaTransacao(p => ({ ...p, banco: val, banco_codigo: found.codigo }));
+                        }}
+                        placeholder="Digite ou selecione"
+                      />
+                      <datalist id="bancos-list">
+                        {bancosUnicos.map((b, i) => (
+                          <option key={i} value={b.banco} />
+                        ))}
+                      </datalist>
                     </div>
                     <div>
                       <Label>Código do Banco</Label>
