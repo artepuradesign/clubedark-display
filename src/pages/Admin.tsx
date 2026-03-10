@@ -814,7 +814,7 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
           {t.descricao} {pencilBtn(t)}
         </span>
       </td>
-      <td style={{ padding: "4px 8px", verticalAlign: "top", color: "#555", fontSize: "11px", lineHeight: "2" }}>
+      <td style={{ padding: "4px 8px", verticalAlign: "top", color: "#555", fontSize: "11px", lineHeight: "2.5" }}>
         <span className="inline-flex items-center gap-1 flex-wrap">
           {t.beneficiario_nome} - {t.beneficiario_documento} - {t.beneficiario_banco}
           {t.beneficiario_banco_codigo ? ` (${t.beneficiario_banco_codigo})` : ""}
