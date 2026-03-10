@@ -185,7 +185,7 @@ const ExtratoExport = () => {
                 R$ {fmt(resumo.saldo_final)}
               </p>
             </div>
-            <table style={{ fontSize: "12px", borderCollapse: "collapse", minWidth: "320px" }}>
+            <table style={{ fontSize: "13px", borderCollapse: "collapse", minWidth: "320px" }}>
               <tbody>
                 <tr>
                   <td style={{ fontWeight: 700, padding: "3px 16px 3px 0" }}>Saldo inicial</td>
