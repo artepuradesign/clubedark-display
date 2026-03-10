@@ -844,13 +844,13 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
 
   const renderTransacaoRow = (t: any, i: number) => (
     <tr key={t.id || i}>
-      <td style={{ padding: "4px 16px 4px 0" }}></td>
-      <td style={{ padding: "4px 0", verticalAlign: "top", width: "200px" }}>
+      <td style={{ padding: "8px 16px 8px 0" }}></td>
+      <td style={{ padding: "8px 0", verticalAlign: "top", width: "200px" }}>
         <span className="inline-flex items-center gap-1">
           {t.descricao} {pencilBtn(t)}
         </span>
       </td>
-      <td style={{ padding: "4px 8px", verticalAlign: "top", color: "#555", fontSize: "11px", lineHeight: "2.5" }}>
+      <td style={{ padding: "8px 8px", verticalAlign: "top", color: "#555", fontSize: "11.5px", lineHeight: "2.5" }}>
         <span className="inline-flex items-center gap-1 flex-wrap">
           {t.beneficiario_nome} - {t.beneficiario_documento} - {t.beneficiario_banco}
           {t.beneficiario_banco_codigo ? ` (${t.beneficiario_banco_codigo})` : ""}
@@ -858,7 +858,7 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
           {pencilBtn(t)}
         </span>
       </td>
-      <td style={{ textAlign: "right", padding: "4px 0 4px 24px", verticalAlign: "top", whiteSpace: "nowrap" }}>
+      <td style={{ textAlign: "right", padding: "8px 0 8px 24px", verticalAlign: "top", whiteSpace: "nowrap" }}>
         <span className="inline-flex items-center gap-1">
           {formatCurrency(parseFloat(t.valor))} {pencilBtn(t)}
         </span>
