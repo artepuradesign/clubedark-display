@@ -878,7 +878,7 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
         {/* HEADER */}
         <div className="flex justify-between items-start mb-12">
           <img src={logoNu} alt="Nu" style={{ height: "32px", width: "auto", marginLeft: "30px" }} />
-          <div className="text-right" style={{ fontSize: "12px", lineHeight: "1.6" }}>
+          <div className="text-right" style={{ fontSize: "13px", lineHeight: "1.8" }}>
             <p>{contaInfo.titular || "—"}</p>
             <p>
               <span style={{ fontWeight: 700, color: "#222" }}>{contaInfo.tipo_conta === "PJ" ? "CNPJ" : "CPF"}</span>{"  "}{contaInfo.documento || "—"}{"  "}
