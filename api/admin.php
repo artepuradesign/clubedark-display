@@ -284,6 +284,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
+    if ($action === 'atualizar_saldo_inicial') {
+        try {
+            $contaId = intval($data['conta_id']);
+            $novoSaldoInicial = floatval($data['saldo_inicial']);
+
+            // Update saldo_anterior of the first transaction in the period
+            $dataInicio = $data['data_inicio'] ?? date('Y-m-d', strtotime('-1 year'));
+
+            $stmt = $pdo->prepare("
+                SELECT id FROM transacoes
+                WHERE conta_id = ? AND DATE(data_transacao) >= ?
+                ORDER BY data_transacao ASC LIMIT 1
+            ");
+            $stmt->execute([$contaId, $dataInicio]);
+            $primeira = $stmt->fetch();
+
+            if ($primeira) {
+                $stmt = $pdo->prepare("UPDATE transacoes SET saldo_anterior = ? WHERE id = ?");
+                $stmt->execute([$novoSaldoInicial, $primeira['id']]);
+            }
+
+            echo json_encode(['success' => true, 'message' => 'Saldo inicial atualizado']);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Erro ao atualizar saldo inicial: ' . $e->getMessage()]);
+        }
+        exit();
+    }
+
     http_response_code(400);
     echo json_encode(['error' => 'Ação não reconhecida']);
 }
