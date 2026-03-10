@@ -948,7 +948,7 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
         {/* MOVIMENTAÇÕES */}
         <div style={{ borderBottom: "2px solid #ccc", marginBottom: "4px" }}></div>
         <div style={{ marginBottom: "16px" }}>
-          <span style={{ fontWeight: 700, fontSize: "12px" }}>Movimentações</span>
+          <span style={{ fontWeight: 700, fontSize: "13px" }}>Movimentações</span>
         </div>
 
         {datasOrdenadas.length === 0 && <p style={{ textAlign: "center", color: "#999", padding: "20px 0" }}>Nenhuma movimentação encontrada.</p>}
