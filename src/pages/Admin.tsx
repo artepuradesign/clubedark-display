@@ -459,6 +459,7 @@ function EditTransacaoModal({ transacao, open, onClose, onSaved }: {
 }) {
   const [form, setForm] = useState({
     data_transacao: "",
+    tipo: "entrada" as string,
     descricao: "",
     valor: "",
     beneficiario_nome: "",
@@ -474,6 +475,7 @@ function EditTransacaoModal({ transacao, open, onClose, onSaved }: {
     if (transacao) {
       setForm({
         data_transacao: transacao.data_transacao ? transacao.data_transacao.substring(0, 10) : "",
+        tipo: transacao.tipo || "entrada",
         descricao: transacao.descricao || "",
         valor: transacao.valor || "",
         beneficiario_nome: transacao.beneficiario_nome || "",
@@ -514,6 +516,17 @@ function EditTransacaoModal({ transacao, open, onClose, onSaved }: {
           <div>
             <Label>Data</Label>
             <Input type="date" value={form.data_transacao} onChange={e => setForm(p => ({ ...p, data_transacao: e.target.value }))} />
+          </div>
+          <div>
+            <Label>Tipo</Label>
+            <select
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              value={form.tipo}
+              onChange={e => setForm(p => ({ ...p, tipo: e.target.value }))}
+            >
+              <option value="entrada">Entrada</option>
+              <option value="saida">Saída</option>
+            </select>
           </div>
           <div>
             <Label>Valor (R$)</Label>

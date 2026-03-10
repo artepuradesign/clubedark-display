@@ -237,8 +237,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $diferencaValor = $novoValor - $valorAntigo;
 
             // Update transaction fields
+            $novoTipo = $data['tipo'] ?? $transacao['tipo'];
             $stmt = $pdo->prepare("
                 UPDATE transacoes SET
+                    tipo = COALESCE(?, tipo),
                     data_transacao = COALESCE(?, data_transacao),
                     descricao = COALESCE(?, descricao),
                     valor = ?,
@@ -251,6 +253,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 WHERE id = ?
             ");
             $stmt->execute([
+                $novoTipo,
                 $data['data_transacao'] ?? null,
                 $data['descricao'] ?? null,
                 $novoValor,
