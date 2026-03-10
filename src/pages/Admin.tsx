@@ -999,7 +999,8 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
 // Export component
 function ExportarExtrato({ selectedConta, contaInfo }: { selectedConta: string; contaInfo: any }) {
   const navigate = useNavigate();
-  const [modo, setModo] = useState<"mes" | "periodo">("mes");
+  const [modo, setModo] = useState<"rapido" | "mes" | "periodo">("rapido");
+  const [atalho, setAtalho] = useState("1m");
   const [mesSelecionado, setMesSelecionado] = useState(() => {
     const now = new Date();
     return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
@@ -1024,11 +1025,29 @@ function ExportarExtrato({ selectedConta, contaInfo }: { selectedConta: string; 
     return opcoes;
   };
 
+  const calcularPeriodoRapido = (tipo: string): { inicio: string; fim: string } => {
+    const hoje = new Date();
+    const fim = hoje.toISOString().substring(0, 10);
+    let d: Date;
+    switch (tipo) {
+      case "1m": d = new Date(hoje.getFullYear(), hoje.getMonth() - 1, hoje.getDate()); break;
+      case "3m": d = new Date(hoje.getFullYear(), hoje.getMonth() - 3, hoje.getDate()); break;
+      case "6m": d = new Date(hoje.getFullYear(), hoje.getMonth() - 6, hoje.getDate()); break;
+      case "1a": d = new Date(hoje.getFullYear() - 1, hoje.getMonth(), hoje.getDate()); break;
+      default: d = new Date(hoje.getFullYear(), hoje.getMonth() - 1, hoje.getDate());
+    }
+    return { inicio: d.toISOString().substring(0, 10), fim };
+  };
+
   const handleContinuar = () => {
     if (!selectedConta) { toast.error("Selecione uma conta primeiro"); return; }
 
     let inicio: string, fim: string;
-    if (modo === "mes") {
+    if (modo === "rapido") {
+      const p = calcularPeriodoRapido(atalho);
+      inicio = p.inicio;
+      fim = p.fim;
+    } else if (modo === "mes") {
       const [ano, mes] = mesSelecionado.split("-").map(Number);
       inicio = `${ano}-${String(mes).padStart(2, "0")}-01`;
       const ultimoDia = new Date(ano, mes, 0).getDate();
@@ -1042,6 +1061,13 @@ function ExportarExtrato({ selectedConta, contaInfo }: { selectedConta: string; 
     navigate(`/extrato-export?conta_id=${selectedConta}&data_inicio=${inicio}&data_fim=${fim}`);
   };
 
+  const atalhos = [
+    { value: "1m", label: "1 mês" },
+    { value: "3m", label: "3 meses" },
+    { value: "6m", label: "6 meses" },
+    { value: "1a", label: "1 ano" },
+  ];
+
   return (
     <Card className="nu-card border-0">
       <CardHeader>
@@ -1053,24 +1079,38 @@ function ExportarExtrato({ selectedConta, contaInfo }: { selectedConta: string; 
         </p>
 
         {/* Seletor de modo */}
-        <div className="flex gap-2 mb-6">
-          <Button
-            variant={modo === "mes" ? "hero" : "outline"}
-            size="sm"
-            onClick={() => setModo("mes")}
-          >
+        <div className="flex gap-2 mb-6 flex-wrap">
+          <Button variant={modo === "rapido" ? "hero" : "outline"} size="sm" onClick={() => setModo("rapido")}>
+            Rápido
+          </Button>
+          <Button variant={modo === "mes" ? "hero" : "outline"} size="sm" onClick={() => setModo("mes")}>
             Por mês
           </Button>
-          <Button
-            variant={modo === "periodo" ? "hero" : "outline"}
-            size="sm"
-            onClick={() => setModo("periodo")}
-          >
+          <Button variant={modo === "periodo" ? "hero" : "outline"} size="sm" onClick={() => setModo("periodo")}>
             Por período
           </Button>
         </div>
 
-        {modo === "mes" ? (
+        {modo === "rapido" ? (
+          <div className="mb-6">
+            <Label className="mb-2 block">Período</Label>
+            <div className="flex gap-2 flex-wrap">
+              {atalhos.map(a => (
+                <Button
+                  key={a.value}
+                  variant={atalho === a.value ? "hero" : "outline"}
+                  size="sm"
+                  onClick={() => setAtalho(a.value)}
+                >
+                  {a.label}
+                </Button>
+              ))}
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              De {calcularPeriodoRapido(atalho).inicio.split("-").reverse().join("/")} até hoje
+            </p>
+          </div>
+        ) : modo === "mes" ? (
           <div className="mb-6">
             <Label>Mês *</Label>
             <Select value={mesSelecionado} onValueChange={setMesSelecionado}>
