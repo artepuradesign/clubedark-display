@@ -892,10 +892,10 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
         {/* PERÍODO */}
         <div style={{ borderBottom: "2px solid #ccc", paddingBottom: "8px", marginBottom: "24px" }}>
           <div className="flex justify-between items-baseline">
-            <span style={{ fontWeight: 700, fontSize: "12px" }}>
+            <span style={{ fontWeight: 700, fontSize: "13px" }}>
               {extratoData?.periodo ? `${fmtPeriodo(extratoData.periodo.inicio)} a ${fmtPeriodo(extratoData.periodo.fim)}` : "—"}
             </span>
-            <span style={{ fontSize: "12px", color: "#666" }}>VALORES EM R$</span>
+            <span style={{ fontSize: "13px", color: "#666" }}>VALORES EM R$</span>
           </div>
         </div>
 
