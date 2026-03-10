@@ -237,7 +237,7 @@ const ExtratoExport = () => {
                     {entradas.length > 0 && (
                       <>
                         <tr>
-                          <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222", fontWeight: 700 }}>{fmtDia(dia)}</td>
+                          <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222" }}>{fmtDia(dia)}</td>
                           <td style={{ fontWeight: 700, padding: "10px 0", verticalAlign: "top" }}>Total de entradas</td>
                           <td style={{ padding: "10px 0" }}></td>
                           <td style={{ fontWeight: 700, textAlign: "right", padding: "10px 0 10px 24px", whiteSpace: "nowrap", verticalAlign: "top" }}>+ {fmt(totalE)}</td>
