@@ -292,7 +292,22 @@ const Admin = () => {
                     </div>
                     <div>
                       <Label>Banco</Label>
-                      <Input value={novaTransacao.banco} onChange={e => setNovaTransacao(p => ({ ...p, banco: e.target.value }))} />
+                      <Input
+                        list="bancos-list"
+                        value={novaTransacao.banco}
+                        onChange={e => {
+                          const val = e.target.value;
+                          setNovaTransacao(p => ({ ...p, banco: val }));
+                          const found = bancosUnicos.find(b => b.banco === val);
+                          if (found) setNovaTransacao(p => ({ ...p, banco: val, banco_codigo: found.codigo }));
+                        }}
+                        placeholder="Digite ou selecione"
+                      />
+                      <datalist id="bancos-list">
+                        {bancosUnicos.map((b, i) => (
+                          <option key={i} value={b.banco} />
+                        ))}
+                      </datalist>
                     </div>
                     <div>
                       <Label>Código do Banco</Label>
