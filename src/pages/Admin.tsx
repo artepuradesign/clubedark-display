@@ -459,6 +459,7 @@ function EditTransacaoModal({ transacao, open, onClose, onSaved }: {
 }) {
   const [form, setForm] = useState({
     data_transacao: "",
+    tipo: "entrada" as string,
     descricao: "",
     valor: "",
     beneficiario_nome: "",
@@ -474,6 +475,7 @@ function EditTransacaoModal({ transacao, open, onClose, onSaved }: {
     if (transacao) {
       setForm({
         data_transacao: transacao.data_transacao ? transacao.data_transacao.substring(0, 10) : "",
+        tipo: transacao.tipo || "entrada",
         descricao: transacao.descricao || "",
         valor: transacao.valor || "",
         beneficiario_nome: transacao.beneficiario_nome || "",
