@@ -325,6 +325,7 @@ const Admin = () => {
                     extratoData={extratoData}
                     formatCurrency={formatCurrency}
                     onTransacaoUpdated={() => fetchExtrato(selectedConta)}
+                    contaId={selectedConta}
                   />
                 )}
               </CardContent>
