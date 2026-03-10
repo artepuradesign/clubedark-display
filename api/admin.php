@@ -266,16 +266,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $transacaoId,
             ]);
 
-            // If value changed, update account balance
-            if ($diferencaValor != 0) {
-                $contaId = $transacao['conta_id'];
-                if ($transacao['tipo'] === 'entrada') {
-                    $stmt = $pdo->prepare("UPDATE contas SET saldo = saldo + ? WHERE id = ?");
-                } else {
-                    $stmt = $pdo->prepare("UPDATE contas SET saldo = saldo - ? WHERE id = ?");
-                }
-                $stmt->execute([$diferencaValor, $contaId]);
+            // Recalculate balance considering type change and value change
+            $contaId = $transacao['conta_id'];
+            $tipoAntigo = $transacao['tipo'];
+
+            // Reverse the old transaction effect
+            if ($tipoAntigo === 'entrada') {
+                $stmt = $pdo->prepare("UPDATE contas SET saldo = saldo - ? WHERE id = ?");
+            } else {
+                $stmt = $pdo->prepare("UPDATE contas SET saldo = saldo + ? WHERE id = ?");
             }
+            $stmt->execute([$valorAntigo, $contaId]);
+
+            // Apply the new transaction effect
+            if ($novoTipo === 'entrada') {
+                $stmt = $pdo->prepare("UPDATE contas SET saldo = saldo + ? WHERE id = ?");
+            } else {
+                $stmt = $pdo->prepare("UPDATE contas SET saldo = saldo - ? WHERE id = ?");
+            }
+            $stmt->execute([$novoValor, $contaId]);
 
             $pdo->commit();
             echo json_encode(['success' => true, 'message' => 'Transação atualizada']);
