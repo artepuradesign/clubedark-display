@@ -882,16 +882,13 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
                         value={saldoInicialInput}
                         onChange={e => setSaldoInicialInput(e.target.value)}
                         onKeyDown={e => {
-                          if (e.key === "Enter") {
-                            setSaldoInicial(parseFloat(saldoInicialInput) || 0);
-                            setEditingSaldoInicial(false);
-                          }
+                          if (e.key === "Enter") salvarSaldoInicial(parseFloat(saldoInicialInput) || 0);
                           if (e.key === "Escape") setEditingSaldoInicial(false);
                         }}
                         autoFocus
                         className="w-28 text-right border rounded px-1 py-0.5 text-xs"
                       />
-                      <button onClick={() => { setSaldoInicial(parseFloat(saldoInicialInput) || 0); setEditingSaldoInicial(false); }} className="text-green-600 hover:text-green-800">✓</button>
+                      <button onClick={() => salvarSaldoInicial(parseFloat(saldoInicialInput) || 0)} className="text-green-600 hover:text-green-800">✓</button>
                       <button onClick={() => setEditingSaldoInicial(false)} className="text-red-500 hover:text-red-700">✕</button>
                     </span>
                   ) : (
