@@ -968,12 +968,12 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
                   {entradas.length > 0 && (
                     <>
                       <tr>
-                        <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222" }}>
+                        <td style={{ width: "110px", verticalAlign: "top", padding: "14px 16px 14px 0", color: "#222" }}>
                           <span className="inline-flex items-center gap-1">{fmtDia(dia)} {pencilBtn(entradas[0])}</span>
                         </td>
-                        <td style={{ fontWeight: 700, padding: "10px 0", verticalAlign: "top" }}>Total de entradas</td>
-                        <td style={{ padding: "10px 0" }}></td>
-                        <td style={{ fontWeight: 700, textAlign: "right", padding: "10px 0 10px 24px", whiteSpace: "nowrap", verticalAlign: "top" }}>+ {formatCurrency(totalE)}</td>
+                        <td style={{ fontWeight: 700, padding: "14px 0", verticalAlign: "top" }}>Total de entradas</td>
+                        <td style={{ padding: "14px 0" }}></td>
+                        <td style={{ fontWeight: 700, textAlign: "right", padding: "14px 0 14px 24px", whiteSpace: "nowrap", verticalAlign: "top" }}>+ {formatCurrency(totalE)}</td>
                       </tr>
                       {entradas.map((t: any, i: number) => renderTransacaoRow(t, i))}
                     </>
@@ -981,21 +981,21 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
                   {saidas.length > 0 && (
                     <>
                       <tr>
-                        <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222" }}>
+                        <td style={{ width: "110px", verticalAlign: "top", padding: "14px 16px 14px 0", color: "#222" }}>
                           {!dateShownInEntradas ? <span className="inline-flex items-center gap-1">{fmtDia(dia)} {pencilBtn(saidas[0])}</span> : ""}
                         </td>
-                        <td style={{ fontWeight: 700, padding: "10px 0", verticalAlign: "top" }}>Total de saídas</td>
-                        <td style={{ padding: "10px 0" }}></td>
-                        <td style={{ fontWeight: 700, textAlign: "right", padding: "10px 0 10px 24px", whiteSpace: "nowrap", verticalAlign: "top" }}>- {formatCurrency(totalS)}</td>
+                        <td style={{ fontWeight: 700, padding: "14px 0", verticalAlign: "top" }}>Total de saídas</td>
+                        <td style={{ padding: "14px 0" }}></td>
+                        <td style={{ fontWeight: 700, textAlign: "right", padding: "14px 0 14px 24px", whiteSpace: "nowrap", verticalAlign: "top" }}>- {formatCurrency(totalS)}</td>
                       </tr>
                       {saidas.map((t: any, i: number) => renderTransacaoRow(t, i))}
                     </>
                   )}
                   <tr style={{ borderBottom: "2px solid #ccc" }}>
-                    <td style={{ padding: "10px 16px 10px 0" }}></td>
-                    <td style={{ fontWeight: 700, padding: "10px 0" }}>Saldo do dia</td>
-                    <td style={{ padding: "10px 0" }}></td>
-                    <td style={{ fontWeight: 700, textAlign: "right", padding: "10px 0 10px 24px" }}>{formatCurrency(saldoPorDia[dia])}</td>
+                    <td style={{ padding: "14px 16px 14px 0" }}></td>
+                    <td style={{ fontWeight: 700, padding: "14px 0" }}>Saldo do dia</td>
+                    <td style={{ padding: "14px 0" }}></td>
+                    <td style={{ fontWeight: 700, textAlign: "right", padding: "14px 0 14px 24px" }}>{formatCurrency(saldoPorDia[dia])}</td>
                   </tr>
                 </tbody>
               </table>
