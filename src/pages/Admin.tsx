@@ -932,7 +932,7 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
                   {entradas.length > 0 && (
                     <>
                       <tr>
-                        <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222", fontWeight: 700 }}>
+                        <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222" }}>
                           <span className="inline-flex items-center gap-1">{fmtDia(dia)} {pencilBtn(entradas[0])}</span>
                         </td>
                         <td style={{ fontWeight: 700, padding: "10px 0", verticalAlign: "top" }}>Total de entradas</td>
@@ -945,7 +945,7 @@ function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extr
                   {saidas.length > 0 && (
                     <>
                       <tr>
-                        <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222", fontWeight: 700 }}>
+                        <td style={{ width: "110px", verticalAlign: "top", padding: "10px 16px 10px 0", color: "#222" }}>
                           {!dateShownInEntradas ? <span className="inline-flex items-center gap-1">{fmtDia(dia)} {pencilBtn(saidas[0])}</span> : ""}
                         </td>
                         <td style={{ fontWeight: 700, padding: "10px 0", verticalAlign: "top" }}>Total de saídas</td>
