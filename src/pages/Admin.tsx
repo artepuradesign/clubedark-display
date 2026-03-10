@@ -750,13 +750,29 @@ function GeradorExtrato({ selectedConta, usuarios, onGenerated }: {
 // ============================================================
 // EXTRATO PREVIEW (with edit modal on all fields)
 // ============================================================
-function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extratoData, formatCurrency, onTransacaoUpdated }: {
-  contaInfo: any; resumo: any; movimentacoes: any; datasOrdenadas: string[]; extratoData: any; formatCurrency: (v: number) => string; onTransacaoUpdated: () => void;
+function ExtratoPreview({ contaInfo, resumo, movimentacoes, datasOrdenadas, extratoData, formatCurrency, onTransacaoUpdated, contaId }: {
+  contaInfo: any; resumo: any; movimentacoes: any; datasOrdenadas: string[]; extratoData: any; formatCurrency: (v: number) => string; onTransacaoUpdated: () => void; contaId: string;
 }) {
   const [editingTransacao, setEditingTransacao] = useState<any>(null);
   const [saldoInicial, setSaldoInicial] = useState<number>(resumo.saldo_inicial || 0);
   const [editingSaldoInicial, setEditingSaldoInicial] = useState(false);
   const [saldoInicialInput, setSaldoInicialInput] = useState("");
+
+  const salvarSaldoInicial = async (valor: number) => {
+    setSaldoInicial(valor);
+    setEditingSaldoInicial(false);
+    try {
+      await apiPost("admin.php", {
+        action: "atualizar_saldo_inicial",
+        conta_id: parseInt(contaId),
+        saldo_inicial: valor,
+        data_inicio: extratoData?.periodo?.inicio,
+      });
+      toast.success("Saldo inicial salvo!");
+    } catch {
+      toast.error("Erro ao salvar saldo inicial");
+    }
+  };
 
   useEffect(() => {
     setSaldoInicial(resumo.saldo_inicial || 0);
